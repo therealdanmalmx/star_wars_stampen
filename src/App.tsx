@@ -4,6 +4,17 @@ import "./App.css";
 function App() {
   const [films, setFilms] = useState([]);
 
+  const getCharacters = async (film: { characters: string[] }) => {
+    const characters = await Promise.all(
+      film.characters.map(async (character: string) => {
+        const response = await fetch(character);
+        const data = await response.json();
+        return data;
+      })
+    );
+    console.log(characters);
+  };
+
   useEffect(() => {
     const fetchTheDarkSide = async () => {
       const response = await fetch("https://swapi.dev/api/films/");
@@ -17,7 +28,7 @@ function App() {
   return (
     <>
       {films.map((film: { title: string }) => {
-        return <h1>{film.title}</h1>;
+        return <h1 onClick={() => getCharacters(film)}>{film.title}</h1>;
       })}
     </>
   );
