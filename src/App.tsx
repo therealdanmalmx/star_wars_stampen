@@ -27,7 +27,7 @@ function App() {
 
   return (
     <>
-      {films.map((film: { title: string }) => {
+      {films.map((film: { title: string; characters: string[] }) => {
         return <h1 onClick={() => getCharacters(film)}>{film.title}</h1>;
       })}
     </>
