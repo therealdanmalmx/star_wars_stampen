@@ -57,30 +57,16 @@ const Movies = () => {
     )
   }
   return (
-
     <div className="grid grid-col-1 md:grid-cols-3 gap-x-4 gap-y-12 justify-center md:justify-between">
-    {films.map((film: { title: string; characters: string[], episode_id: number }) => (
-      <Link to={`/movie/${film.episode_id}`}  key={film.episode_id}>
-        <div className="flex flex-col cursor-pointer" onMouseOver={() => getCharacters(film)}>
-          <img src={`src/assets/${getFilmTitleSlug(film.title)}.jpg`} alt={`${film.title} image`} className="h-[450px] object-cover"/>
-          <h1 className="text-2xl text-center bg-black w-full font-staatliches text-yellow-500 p-4 md:p-8">{film.title}</h1>
-        </div>
-
-      </Link>
-    ))}
-      {/* { films.length && characters.length ? (<h1 className="text-3xl font-bold col-span-3">Charaters in <span className="py-4 px-6 text-yellow-500 bg-black text-staatliches">{filmTitle}</span></h1>) :
-      (<h1 className="text-3xl font-bold col-span-3">Hover over a movie to see the characters</h1>)
-    }
-    <div className="col-span-3 w-full overflow-x-scroll flex [&::-webkit-scrollbar]:hidden">
-      {characters && characters.map((character) => (
-        <>
-          <div key={character.name} className="flex justify-center items-center min-w-32 min-h-32 rounded-full bg-black  mx-2">
-            <div className="w-3/4 text-center text-yellow-500 font-bold text-staatliches">{character.name}</div>
+      {films.map((film: { title: string; characters: string[], episode_id: number }, index) => (
+        <Link to={`/movie/${index + 1}`}  key={film.episode_id}>
+          <div className="flex flex-col cursor-pointer" onMouseOver={() => getCharacters(film)}>
+            <img src={`src/assets/${getFilmTitleSlug(film.title)}.jpg`} alt={`${film.title} image`} className="h-[450px] object-cover"/>
+            <h1 className="text-2xl text-center bg-black w-full font-staatliches text-yellow-500 p-4 md:p-8">{film.title}</h1>
           </div>
-        </>
-      ))  }
-    </div> */}
-  </div>
+        </Link>
+      ))}
+    </div>
   )
 }
 
