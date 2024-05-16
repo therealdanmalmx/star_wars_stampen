@@ -7,11 +7,20 @@ import {
 } from "react-router-dom";
 import "./index.css";
 import Movies from './components/Movies';
+import Movie from './components/Movie';
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Movies />,
+  },
+  {
+    path: "/movie/:id",
+    element: <Movie />,
+  },
+  {
+    path: "/about",
+    element: <h1>About</h1>,
   },
 ]);
 

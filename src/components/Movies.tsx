@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom';
 import MoonLoader from "react-spinners/MoonLoader";
-
+import { getFilmTitleSlug } from '../../utils/helpers';
 
 type Character = {
   name: string;
@@ -16,10 +17,6 @@ const Movies = () => {
   const [filmTitle, setFilmTitle] = useState('');
   const [loading, setLoading] = useState(false);
   const starWarsAPI = 'https://swapi.dev/api/'
-
-  const getFilmTitleSlug = (title: string) => {
-    return title.toLowerCase().replace(/ /g, "-");
-  };
 
 
   const getCharacters = async (film: { characters: string[], title: string }) => {
@@ -54,7 +51,6 @@ const Movies = () => {
           color={"#FFD700"}
           loading={loading}
           size={250}
-          title='Finding the force...'
         />
         <h1 className='bg-black p-4 text-3xl mt-6 text-yellow-500 font-staatliches'>Finding the force...</h1>
       </div>
@@ -63,11 +59,14 @@ const Movies = () => {
   return (
 
     <div className="grid grid-col-1 md:grid-cols-3 gap-x-4 gap-y-12 justify-center md:justify-between">
-    {films.map((film: { title: string; characters: string[] }) => (
-      <div key={film.title} className="flex flex-col cursor-pointer" onMouseOver={() => getCharacters(film)}>
-        <img src={`src/assets/${getFilmTitleSlug(film.title)}.jpg`} alt={`${film.title} image`} className="h-[450px] object-cover"/>
-        <h1 className="text-2xl text-center bg-black w-full font-staatliches text-yellow-500 p-4 md:p-8">{film.title}</h1>
-      </div>
+    {films.map((film: { title: string; characters: string[], episode_id: number }) => (
+      <Link to={`/movie/${film.episode_id}`}  key={film.episode_id}>
+        <div className="flex flex-col cursor-pointer" onMouseOver={() => getCharacters(film)}>
+          <img src={`src/assets/${getFilmTitleSlug(film.title)}.jpg`} alt={`${film.title} image`} className="h-[450px] object-cover"/>
+          <h1 className="text-2xl text-center bg-black w-full font-staatliches text-yellow-500 p-4 md:p-8">{film.title}</h1>
+        </div>
+
+      </Link>
     ))}
       {/* { films.length && characters.length ? (<h1 className="text-3xl font-bold col-span-3">Charaters in <span className="py-4 px-6 text-yellow-500 bg-black text-staatliches">{filmTitle}</span></h1>) :
       (<h1 className="text-3xl font-bold col-span-3">Hover over a movie to see the characters</h1>)
