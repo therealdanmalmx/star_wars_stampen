@@ -8,30 +8,39 @@ type Character = {
     skin_color: string;
   };
 
-  interface FilmContextType {
+  type FilmContextType = {
     films: any[];
     characters: Character[];
     selectedFilm: any;
+    fetchTheDarkSide: () => void;
     setSelectedFilm: (film: any) => void;
     loading: boolean;
-    setLoading: (loading: boolean) => void;
     starWarsAPI: string;
     getCharacters: (film: { characters: string[]; title: string }) => void;
   }
-const FilmContext = createContext<FilmContextType>({
-  films: [],
-  characters: [],
-  selectedFilm: null,
-  setSelectedFilm: () => {},
-  loading: false,
-  setLoading: () => {},
-  starWarsAPI: "",
-});
 
-export const FilmProvider = ({ children, starWarsAPI = "https://swapi.dev/api/" }) => {
+  const FilmContext = createContext<FilmContextType>({
+    films: [],
+    characters: [],
+    selectedFilm: null,
+    fetchTheDarkSide: () => {},
+    setSelectedFilm: () => {},
+    loading: false,
+    starWarsAPI: "",
+    getCharacters: () => {},
+  });
+
+  interface Props {
+    children: React.ReactNode;
+    starWarsAPI: "https://swapi.dev/api/"
+  }
+
+export const useFilmContext = () => createContext(FilmContext);
+
+export const FilmProvider = ({ children, starWarsAPI}: Props) => {
   const [films, setFilms] = useState([]);
   const [filmTitle, setFilmTitle] = useState("");
-const [characters, setCharacters] = useState<Character[]>([]);
+  const [characters, setCharacters] = useState<Character[]>([]);
   const [selectedFilm, setSelectedFilm] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -74,9 +83,8 @@ const [characters, setCharacters] = useState<Character[]>([]);
   };
 
   return (
-    <FilmContext.Provider value={contextValue}>{children}</FilmContext.Provider>
+    <FilmContext.Provider value={{contextValue}}>{children}</FilmContext.Provider>
   );
 };
 
 export default FilmContext;
-
