@@ -1,8 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { MoviesProvider } from "./contexts/MoviesContext";
 import Movies from "./components/Movies";
 import SingleMovie from "./components/SingleMovie";
-import { MoviesProvider } from "./contexts/MoviesContext";
-import { MovieProvider } from "./contexts/MovieContext";
 
 function App() {
   return (
