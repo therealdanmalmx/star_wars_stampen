@@ -8,7 +8,7 @@ export type Character = {
     birth_year: string,
     gender: string,
     homeworld: string,
-    films: Film[],
+    films: Movie[],
     species: [],
     vehicles: [],
     starships: [],
@@ -17,7 +17,7 @@ export type Character = {
     url: string
   };
 
-  export type Film = {
+  export type Movie = {
     title: string;
     episode_id: number;
     opening_crawl: string;
@@ -26,24 +26,28 @@ export type Character = {
     release_date: string;
     characters: Character[];
     character: string;
-    films: Film[];
     planets: [],
     starships: [],
     vehicles: [],
     species: [],
     created: string,
     edited: string,
-    url: string
   };
 
-  export type Films = Film[];
+  export type Movies = Movie[];
 
-  export type FilmContextTypes = {
-    films: Films;
+  export type FilmsContextTypes = {
+    films: Movies;
     characters: Character[];
     loading: boolean;
-    getCharacters: (character: Film) => void;
-    filmTitle: string;
+    getCharacters: (character: Movie) => void;
+  };
+
+  export type FilmContextTypes = {
+    film: Movie;
+    loading: boolean;
+    getSingleFilm: () => void;
+
   };
 
   export type FilmProp = {

@@ -1,64 +1,90 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import {
   Character,
-  FilmContextTypes,
+  FilmsContextTypes,
   FilmProp,
-  Film,
-  Films,
+  Movie,
+  Movies,
 } from "../types/types";
 
-const FilmContext = createContext<FilmContextTypes>({
+const MoviesContext = createContext<FilmsContextTypes>({
   films: [],
   characters: [],
   loading: false,
   getCharacters: () => {},
-  filmTitle: "",
 });
 
-export const useMovies = () => useContext(FilmContext);
+export const useMovies = () => useContext(MoviesContext);
 
-export const FilmProvider = ({ children }: FilmProp) => {
-  const [films, setFilms] = useState<Films>([]);
-  const [filmTitle, setFilmTitle] = useState<string>("");
+export const MoviesProvider = ({ children }: FilmProp) => {
+  const [films, setFilms] = useState<Movies>([]);
   const [characters, setCharacters] = useState<Character[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
 
-  const getCharacters = async (film: Film) => {
-    const characters: Character[] = await Promise.all(
-      film.characters.map(async (character) => {
-        const characterUrl = character.url;
-        const response = await fetch(characterUrl);
-        const data = await response.json();
-        return data;
-      })
-    );
-    setFilmTitle(film.title);
-    setCharacters(characters);
+  // const getCharacters = async (film: Movie) => {
+  //   const characters: Character[] = await Promise.all(
+  //     film.characters.map(async (character) => {
+  //       const characterUrl = character.url;
+  //       const response = await fetch(characterUrl);
+  //       const data = await response.json();
+  //       return data;
+  //     })
+  //   );
+  //   setFilmTitle(film.title);
+  //   setCharacters(characters);
+  // };
+
+  const getCharacters = async (film: Movie) => {
+    try {
+      const characters: Character[] = await Promise.all(
+        film.characters.map(async (character) => {
+          const characterUrl = character.url;
+          const response = await fetch(characterUrl);
+          if (!response.ok) {
+            throw new Error(`Failed to fetch character ${character.name}`);
+          }
+          const data = await response.json();
+          return data;
+        })
+      );
+      setCharacters(characters);
+    } catch (error) {
+      throw new Error(`Failed to fetch characters for ${film.title}`);
+    }
   };
 
   useEffect(() => {
     const fetchTheDarkSide = async () => {
       setLoading(true);
-      const response = await fetch("https://swapi.dev/api/films");
-      console.log({ response });
-      const data = await response.json();
-      setFilms(data.results);
-      setLoading(false);
+      try {
+        const response = await fetch("https://swapi.dev/api/films");
+        if (!response.ok) {
+          throw new Error("Failed to fetch the Star Wars films.");
+        }
+        const data = await response.json();
+        setFilms(data.results);
+        setLoading(false);
+      } catch (error) {
+        throw new Error(
+          "Something went wrong while fetching the films. Try again later."
+        );
+      }
     };
     fetchTheDarkSide();
   }, []);
 
-  const contextValue: FilmContextTypes = {
+  const contextValue: FilmsContextTypes = {
     films,
     characters,
     loading,
     getCharacters,
-    filmTitle,
   };
 
   return (
-    <FilmContext.Provider value={contextValue}>{children}</FilmContext.Provider>
+    <MoviesContext.Provider value={contextValue}>
+      {children}
+    </MoviesContext.Provider>
   );
 };
 
-export default FilmContext;
+export default MoviesContext;
