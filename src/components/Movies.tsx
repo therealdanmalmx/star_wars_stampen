@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import MoonLoader from "react-spinners/MoonLoader";
 import { getFilmTitleSlug } from "../../utils/helpers";
 import Movie from "./Movie";
+import Spinner from "./Spinner";
 
 type Character = {
   name: string;
@@ -48,16 +49,16 @@ const Movies = () => {
 
   if (loading) {
     return (
-      <div className='h-dvh flex flex-col justify-center items-center'>
-        <MoonLoader color={"#FFD700"} loading={loading} size={250} />
-        <h1 className='bg-black p-4 text-3xl mt-6 text-yellow-500 font-staatliches'>
-          The force will soon be with you...
-        </h1>
+      <div className='font-staatliches'>
+        <Spinner
+          loadingText='The force will soon be with you...'
+          loading={loading}
+        />
       </div>
     );
   }
   return (
-    <div className='h-dvh grid grid-col-1 md:grid-cols-3 gap-x-4 gap-y-12 justify-center md:justify-between'>
+    <div className='grid grid-cols-1 md:grid-cols-3 gap-12 mx-6 md:mx-96 justify-center items-start'>
       {films.map(
         (
           film: { title: string; characters: string[]; episode_id: number },
@@ -77,7 +78,6 @@ const Movies = () => {
                 {film.title}
               </h1>
             </div>
-            <Movie film={film} />
           </Link>
         )
       )}

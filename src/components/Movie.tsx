@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getFilmTitleSlug } from "../../utils/helpers";
-import { MoonLoader } from "react-spinners";
+import Spinner from "./Spinner";
 
 type Film = {
   episode_id: number;
@@ -32,11 +32,8 @@ const Movie = () => {
 
   if (loading) {
     return (
-      <div className='h-dvh flex flex-col justify-center items-center'>
-        <MoonLoader color={"#FFD700"} loading={loading} size={250} />
-        <h1 className='bg-black p-4 text-3xl mt-6 text-yellow-500 font-staatliches'>
-          {filmInfo && `Finding ${filmInfo.title}`}
-        </h1>
+      <div className='font-staatliches'>
+        <Spinner loadingText={`Loading ${filmInfo.title}`} loading={loading} />;
       </div>
     );
   }
