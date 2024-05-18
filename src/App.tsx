@@ -8,36 +8,14 @@ function App() {
   return (
     <div className='App'>
       <BrowserRouter>
-        <Routes>
-          <Route
-            path='/'
-            element={
-              <Providers>
-                <Movies />
-              </Providers>
-            }
-          />
-          <Route
-            path='/movie/:id'
-            element={
-              <Providers>
-                <SingleMovie />
-              </Providers>
-            }
-          />
-        </Routes>
+        <MoviesProvider>
+          <Routes>
+            <Route path='/' element={<Movies />} />
+            <Route path='/movie/:id' element={<SingleMovie />} />
+          </Routes>
+        </MoviesProvider>
       </BrowserRouter>
     </div>
   );
 }
-
-interface ProvidersProps {
-  children: JSX.Element;
-}
-const Providers = ({ children }: ProvidersProps): React.ReactElement => (
-  <MoviesProvider>
-    <MovieProvider>{children}</MovieProvider>
-  </MoviesProvider>
-);
-
 export default App;
