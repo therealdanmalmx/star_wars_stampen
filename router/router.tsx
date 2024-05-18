@@ -1,3 +1,4 @@
+import React from "react";
 import { createBrowserRouter } from "react-router-dom";
 import Movie from "../src/components/Movie";
 import Movies from "../src/components/Movies";

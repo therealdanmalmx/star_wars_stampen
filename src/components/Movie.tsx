@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getFilmTitleSlug } from "../../utils/helpers";
+import { getFilmTitleSlug } from "../utils/helpers";
 import Spinner from "./Spinner";
 
 type Film = {
