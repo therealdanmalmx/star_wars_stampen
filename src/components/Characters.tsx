@@ -13,13 +13,10 @@ const Characters = () => {
 
   const charactersList = Array.from(charactersFromFilm);
 
-  console.log("characters", charactersFromFilm);
-
   const getAllCharacters = async (filmCharacters: Character[]) => {
     const fetchedCharacters = await Promise.all(
       filmCharacters.map(async (character) => {
         try {
-          console.log({ character });
           setLoading(true);
           const response = await fetch(character.toString());
           const data = await response.json();
