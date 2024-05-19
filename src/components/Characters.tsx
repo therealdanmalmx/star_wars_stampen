@@ -74,7 +74,7 @@ const Characters = () => {
   }
   return (
     <Link to={`/movie/${movieId}/characters/${characterId}`}>
-      <div className='h-dvh py-40 md:mx-96 gap-12 flex flex-wrap justify-center items-start md:justify-between'>
+      <div className='h-dvh py-40 md:mx-96 gap-12 flex flex-wrap justify-center items-start md:justify-start'>
         {character &&
           character.map((char) => (
             <div
