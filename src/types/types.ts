@@ -1,21 +1,3 @@
-export type Character = {
-    name: string;
-    height: string;
-    mass: string;
-    hair_color: string;
-    skin_color: string;
-    eye_color: string
-    birth_year: string,
-    gender: string,
-    homeworld: string,
-    films: Movie[],
-    species: [],
-    vehicles: [],
-    starships: [],
-    created: string,
-    edited: string,
-    url: string
-  };
 
   export type Movie = {
     title: string;
@@ -34,22 +16,40 @@ export type Character = {
     edited: string,
   };
 
-  export type Movies = Movie[];
+export type FilmsContextTypes = {
+  films: Movies;
+  charactersFromFilm: Character[];
+  loading: boolean;
+  getCharactersForMovie: (character: Movie) => void;
+};
 
-  export type FilmsContextTypes = {
-    films: Movies;
-    characters: Character[];
-    loading: boolean;
-    getCharacters: (character: Movie) => void;
+export type FilmContextTypes = {
+  film: Movie;
+  loading: boolean;
+  getSingleFilm: () => void;
+
+};
+
+export type FilmProp = {
+  children: React.ReactNode;
+}
+export type Movies = Movie[];
+
+export type Character = {
+    name: string;
+    height: string;
+    mass: string;
+    hair_color: string;
+    skin_color: string;
+    eye_color: string
+    birth_year: string,
+    gender: string,
+    homeworld: string,
+    films: Movie[],
+    species: [],
+    vehicles: [],
+    starships: [],
+    created: string,
+    edited: string,
+    url: string
   };
-
-  export type FilmContextTypes = {
-    film: Movie;
-    loading: boolean;
-    getSingleFilm: () => void;
-
-  };
-
-  export type FilmProp = {
-    children: React.ReactNode;
-  }

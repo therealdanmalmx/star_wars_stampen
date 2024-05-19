@@ -1,7 +1,9 @@
 import React from "react";
 import { createBrowserRouter } from "react-router-dom";
-import SingleMovie from "../src/components/SingleMovie";
+import Characters from "../src/components/Characters";
 import Movies from "../src/components/Movies";
+import SingleCharacter from "../src/components/SingleCharacter";
+import SingleMovie from "../src/components/SingleMovie";
 
 export const router = createBrowserRouter([
   {
@@ -9,16 +11,16 @@ export const router = createBrowserRouter([
     element: <Movies />,
   },
   {
-    path: "/movie/:id",
+    path: "/movie/:movieId",
     element: <SingleMovie />,
   },
   {
-    path: "/film/:id/characters",
-    element: <h1>Characters</h1>,
+    path: "/movie/:movieId/characters",
+    element: <Characters />,
   },
   {
-    path: "/film/:id/characters/:id",
-    element: <h1>Character</h1>,
+    path: "/movie/:movieId/characters/:characterId",
+    element: <SingleCharacter />,
   },
 ]);
 

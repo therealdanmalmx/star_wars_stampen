@@ -1,22 +1,22 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import {
   Character,
-  FilmProp,
   FilmsContextTypes,
+  FilmProp,
   Movie,
   Movies,
 } from "../types/types";
 
-const MoviesContext = createContext<FilmsContextTypes>({
+const CharactersContext = createContext<FilmsContextTypes>({
   films: [],
   charactersFromFilm: [],
   loading: false,
   getCharactersForMovie: () => {},
 });
 
-export const useMovies = () => useContext(MoviesContext);
+export const useCharacters = () => useContext(CharactersContext);
 
-export const MoviesProvider = ({ children }: FilmProp) => {
+export const CharactersProvider = ({ children }: FilmProp) => {
   const [films, setFilms] = useState<Movies>([]);
   const [charactersFromFilm, setCharactersFromFilm] = useState<Character[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
@@ -53,10 +53,10 @@ export const MoviesProvider = ({ children }: FilmProp) => {
   };
 
   return (
-    <MoviesContext.Provider value={contextValue}>
+    <CharactersContext.Provider value={contextValue}>
       {children}
-    </MoviesContext.Provider>
+    </CharactersContext.Provider>
   );
 };
 
-export default MoviesContext;
+export default CharactersContext;
