@@ -4,8 +4,10 @@ import Spinner from "./Spinner";
 
 import { Link, useParams } from "react-router-dom";
 import { Movie } from "../types/types";
+import { useMovies } from "../contexts/MoviesContext";
 
 const SingleMovie = () => {
+  const { title } = useMovies();
   const { movieId } = useParams();
   const [film, setFilm] = useState<Movie>({} as Movie);
   const [loading, setLoading] = useState<boolean>(false);
@@ -29,7 +31,7 @@ const SingleMovie = () => {
   if (loading) {
     return (
       <div className='font-staatliches'>
-        <Spinner loadingText='Loading...' loading={loading} />;
+        <Spinner loadingText={`Loading ${title}`} loading={loading} />;
       </div>
     );
   }

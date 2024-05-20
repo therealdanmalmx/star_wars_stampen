@@ -18,6 +18,7 @@
 
 export type FilmsContextTypes = {
   films: Movies;
+  title: string;
   charactersFromFilm: Character[];
   loading: boolean;
   getCharactersForMovie: (character: Movie) => void;
@@ -34,6 +35,8 @@ export type FilmProp = {
   children: React.ReactNode;
 }
 export type Movies = Movie[];
+
+export type MovieId = string;
 
 export type Character = {
     name: string;

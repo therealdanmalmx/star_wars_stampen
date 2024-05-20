@@ -6,7 +6,7 @@ import { Link, useParams } from "react-router-dom";
 
 const Characters = () => {
   const { movieId } = useParams();
-  const { charactersFromFilm } = useMovies();
+  const { charactersFromFilm, title } = useMovies();
   const [characterId, setCharacterId] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
   const [character, setCharacter] = useState<Character[]>([]);
@@ -70,24 +70,30 @@ const Characters = () => {
     );
   }
   return (
-    <Link to={`/movie/${movieId}/characters/${characterId}`}>
-      <div className='h-dvh py-40 md:mx-96 gap-12 flex flex-wrap justify-center items-start md:justify-start'>
-        {character &&
-          character.map((char) => (
-            <div
-              key={char.name}
-              className='bg-black size-36 rounded-full text-center flex justify-center items-center'
-              onMouseOver={() =>
-                setCharacterId(extractIdFromUrl(char.url) ?? "")
-              }
-            >
-              <p className='font-staatliches text-yellow-500 text-2xl text-center w-3/4'>
-                {char.name}
-              </p>
-            </div>
-          ))}
-      </div>
-    </Link>
+    <>
+      <h1 className='pt-40 w-full text-3xl font-staatliches text-center'>
+        Characters for:
+        <p className='text-4xl'>{title}</p>
+      </h1>
+      <Link to={`/movie/${movieId}/characters/${characterId}`}>
+        <div className='h-dvh py-12 md:mx-96 gap-12 flex flex-wrap justify-center items-start md:justify-start'>
+          {character &&
+            character.map((char) => (
+              <div
+                key={char.name}
+                className='bg-black size-36 rounded-full text-center flex justify-center items-center'
+                onMouseOver={() =>
+                  setCharacterId(extractIdFromUrl(char.url) ?? "")
+                }
+              >
+                <p className='font-staatliches text-yellow-500 text-2xl text-center w-3/4'>
+                  {char.name}
+                </p>
+              </div>
+            ))}
+        </div>
+      </Link>
+    </>
   );
 };
 
