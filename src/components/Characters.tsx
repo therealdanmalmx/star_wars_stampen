@@ -76,7 +76,7 @@ const Characters = () => {
         <p className='text-4xl'>{title}</p>
       </h1>
       <Link to={`/movie/${movieId}/characters/${characterId}`}>
-        <div className='h-dvh py-12 md:mx-96 gap-12 flex flex-wrap justify-center items-start md:justify-start'>
+        <div className='h-full py-12 md:mx-96 gap-12 flex flex-wrap justify-center items-start md:justify-start'>
           {character &&
             character.map((char) => (
               <div
