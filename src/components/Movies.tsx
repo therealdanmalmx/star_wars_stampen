@@ -29,9 +29,11 @@ const Movies = () => {
             onClick={() => getCharactersForMovie(film)}
           >
             <img
-              src={`src/assets/${getFilmTitleSlug(film.title)}.jpg`}
+              src={`/images/${getFilmTitleSlug(film.title)}.jpg`}
               alt={`${film.title} image`}
-              className='max-h-[500px] object-cover'
+              height={500}
+              width={330}
+              className='h-[500px] w-fit object-cover'
             />
             <h1 className='text-2xl text-center bg-black w-full font-staatliches text-yellow-500 p-4 md:p-8'>
               {film.title}

@@ -63,9 +63,11 @@ const SingleMovie = () => {
           className='flex flex-col md:flex-row justify-between  border-2 border-black'
         >
           <img
-            src={`/src/assets/${getFilmTitleSlug(film.title)}.jpg`}
+            src={`/images/${getFilmTitleSlug(film.title)}.jpg`}
             alt={`${film.title} image`}
-            className='h-[650px] object-cover'
+            height={650}
+            width={330}
+            className='h-[650px] w-fit object-cover'
           />
           <div>
             <h1 className='bg-black text-yellow-500 px-8 py-6 w-full text-center h-fit text-3xl md:text-5xl uppercase font-staatliches tracking-widest font-bold'>
