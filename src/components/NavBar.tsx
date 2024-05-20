@@ -8,7 +8,7 @@ const NavBar = () => {
         <Link to={"/"}>
           <span className='text-2xl text-white'>Movies</span>
         </Link>
-        <Link to={`/movie/1/characters`}>
+        <Link to={`/movie/movie-id/characters`}>
           <span className='text-2xl text-white'>Characters</span>
         </Link>
       </div>

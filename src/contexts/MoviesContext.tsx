@@ -9,6 +9,7 @@ import {
 
 const MoviesContext = createContext<FilmsContextTypes>({
   films: [],
+  title: "",
   charactersFromFilm: [],
   loading: false,
   getCharactersForMovie: () => {},
@@ -18,10 +19,13 @@ export const useMovies = () => useContext(MoviesContext);
 
 export const MoviesProvider = ({ children }: FilmProp) => {
   const [films, setFilms] = useState<Movies>([]);
+  const [title, settTitle] = useState<string>("");
+
   const [charactersFromFilm, setCharactersFromFilm] = useState<Character[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
 
   const getCharactersForMovie = async (film: Movie) => {
+    settTitle(film.title);
     setCharactersFromFilm(film.characters);
   };
 
@@ -47,6 +51,7 @@ export const MoviesProvider = ({ children }: FilmProp) => {
 
   const contextValue: FilmsContextTypes = {
     films,
+    title,
     charactersFromFilm,
     loading,
     getCharactersForMovie,
