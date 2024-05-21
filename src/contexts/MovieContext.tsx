@@ -2,8 +2,6 @@ import { createContext, useEffect, useState } from "react";
 import { FilmContextTypes, FilmProp, Movie } from "../types/types";
 import { useParams } from "react-router-dom";
 
-// export const useMovie = () => useContext(MovieContext);
-
 const MovieContext = createContext<FilmContextTypes>({
   film: {} as Movie,
   loading: false,
