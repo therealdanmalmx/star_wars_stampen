@@ -3,9 +3,11 @@ import { useMovies } from "../contexts/MoviesContext";
 import { Movie } from "../types/types";
 import { getFilmTitleSlug } from "../utils/helpers";
 import Spinner from "./Spinner";
+import { useMovieId } from "../contexts/IDContext";
 
 const Movies = () => {
   const { films, loading, getCharactersForMovie } = useMovies();
+  const { setMovieId } = useMovieId();
 
   if (loading) {
     return (
@@ -23,7 +25,11 @@ const Movies = () => {
   return (
     <div className='h-dvh py-40 md:mx-96 gap-12 flex flex-wrap justify-center items-start md:justify-between'>
       {films.map((film: Movie, index) => (
-        <Link to={`/movie/${index + 1}`} key={film.episode_id}>
+        <Link
+          to={`/movie/${index + 1}`}
+          key={film.episode_id}
+          onClick={() => setMovieId((index + 1).toString())}
+        >
           <div
             className='flex flex-col cursor-pointer'
             onClick={() => getCharactersForMovie(film)}
@@ -31,9 +37,7 @@ const Movies = () => {
             <img
               src={`/images/${getFilmTitleSlug(film.title)}.jpg`}
               alt={`${film.title} image`}
-              height={500}
-              width={330}
-              className='h-[500px] w-fit object-cover'
+              className='h-[500px] w-[350px] object-cover'
             />
             <h1 className='text-2xl text-center bg-black w-full font-staatliches text-yellow-500 p-4 md:p-8'>
               {film.title}

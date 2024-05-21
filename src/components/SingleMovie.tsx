@@ -65,8 +65,6 @@ const SingleMovie = () => {
           <img
             src={`/images/${getFilmTitleSlug(film.title)}.jpg`}
             alt={`${film.title} image`}
-            height={650}
-            width={330}
             className='h-[650px] w-fit object-cover'
           />
           <div>
