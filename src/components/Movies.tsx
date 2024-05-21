@@ -3,11 +3,9 @@ import { useMovies } from "../contexts/MoviesContext";
 import { Movie } from "../types/types";
 import { getFilmTitleSlug } from "../utils/helpers";
 import Spinner from "./Spinner";
-import { useMovieId } from "../contexts/IDContext";
 
 const Movies = () => {
   const { films, loading, getCharactersForMovie } = useMovies();
-  const { setMovieId } = useMovieId();
 
   if (loading) {
     return (
@@ -28,7 +26,6 @@ const Movies = () => {
         <Link
           to={`/movie/${index + 1}`}
           key={film.episode_id}
-          onClick={() => setMovieId((index + 1).toString())}
         >
           <div
             className='flex flex-col cursor-pointer'
